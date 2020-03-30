@@ -18,6 +18,10 @@ run-db: password-set
 	POSTGRES_PASSWORD="$(POSTGRES_PASSWORD)" \
 	docker-compose up -d
 
+PHONY: print-uri
+print-uri: password-set
+	@echo "postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_HOST):$(POSTGRES_PORT)/$(POSTGRES_DATABASE)"
+
 .PHONY: rm-db
 rm-db:
 	docker stop postgres-dump-loader_postgres_1
